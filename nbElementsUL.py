@@ -1,5 +1,4 @@
 import requests
-import XPath as xp
 from bs4 import BeautifulSoup
 
 #nb de ul dans le div
