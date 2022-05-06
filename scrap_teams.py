@@ -2,7 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 
 # r = requests.get('https://www.ligue1.fr/calendrier-resultats')
-r = requests.get('https://www.ligue1.fr/calendrier-resultats?seasonId=2021-2022&matchDay=6')
+
+
+url = 'https://www.ligue1.fr/calendrier-resultats?seasonId=2021-2022&matchDay=6'
+r = requests.get(url)
 soup = BeautifulSoup(r.content, 'html.parser')
 
 def Xpath(url,path):
@@ -26,18 +29,18 @@ def nbListes():
 
 def nbElementsDansChaqueListe():
     l = []
+    s = soup.find('div', class_='calendar-widget-container')
+    s2 = s.find_all('ul')
     for ul in s2:
         s3 = ul.find_all('li')
         l.append(len(s3))
+    return l
         
 def homeTeam():
-    for i in range(1, len(s2)+1):
-        for j in range(1, l[i-1]+1):
-            print(Xpath('https://www.ligue1.fr/calendrier-resultats?seasonId=2021-2022&matchDay=6', f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[1]/div/span[1]'))
+    l = []
+    for i in range(1, nbListes()+1):
+        for j in range(1, nbElementsDansChaqueListe()[i-1]+1):
+            l.append(Xpath(url, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[1]/div/span[1]'))
+    return l
 
-s = soup.find('div', class_='calendar-widget-container')
-teams = s.find_all('div', class_ = 'club home')
-team_name = s.find_all('span')
 
-for team in team_name:
-    print(team.text)
