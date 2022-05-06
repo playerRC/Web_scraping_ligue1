@@ -11,6 +11,12 @@ def nbListes():
     s2 = s.find_all('ul')
     return len(s2)
 
+def nbElementsDansChaqueListe():
+    l = []
+    for ul in s2:
+        s3 = ul.find_all('li')
+        l.append(len(s3))
+
 s = soup.find('div', class_='calendar-widget-container')
 teams = s.find_all('div', class_ = 'club home')
 team_name = s.find_all('span')
