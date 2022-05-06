@@ -36,7 +36,7 @@ def nbElementsDansChaqueListe():
         l.append(len(s3))
     return l
         
-def homeTeam():
+def homeTeam(url):
     l = []
     for i in range(1, nbListes()+1):
         for j in range(1, nbElementsDansChaqueListe()[i-1]+1):
