@@ -2,6 +2,8 @@ import csv
 import nbElementsUL as nbu
 import goals_team as gt
 import teams as t
+import requests
+from bs4 import BeautifulSoup
 
 header = ['Season','Matchday','HomeTeam', 'AwayTeam', 'HTG', 'ATG']
 with open('all_ligue1_matches.csv', 'w', encoding='UTF8', newline='') as f:
