@@ -46,20 +46,22 @@ def homeGoal(soup):
     l = []
     for i in range(1, nbListes(soup)+1):
         for j in range(1, nbElementsDansChaqueListe(soup)[i-1]+1):
-            if Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[1]') == None:
-                l.append(None)
+            HTG = Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[1]')
+            if HTG == 'Reporté' or HTG == 'Annulé' or HTG == None:
+                l.append(HTG)
             else:
-                l.append(int(Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[1]')))
+                l.append(int(HTG))
     return l
 
 def awayGoal(soup):
     l = []
     for i in range(1, nbListes(soup)+1):
         for j in range(1, nbElementsDansChaqueListe(soup)[i-1]+1):
-            if Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[3]') == None:
-                l.append(None)
+            ATG = Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[3]')
+            if ATG == None:
+                l.append(ATG)
             else:
-                l.append(int(Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[3]')))
+                l.append(int(ATG))
     return l
 
 
@@ -81,7 +83,10 @@ with open('all_ligue1_matches.csv', 'w', encoding='UTF-8', newline='') as f:
                 r = requests.get(url, Dict_Headers)
                 soup = BeautifulSoup(r.content, 'html.parser')
                 for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    fwriter.writerow(['2019-2020', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                    if type(homeGoal(soup)[j]) != int:
+                        pass
+                    else:
+                        fwriter.writerow(['2019-2020', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
         elif annee == 1997 or annee == 1998 or annee == 1999 or annee == 2000 or annee == 2001:
             # annees ligue 1 composee de 18 equipes donc 34 journees
             for i in range(1,35):
@@ -89,7 +94,10 @@ with open('all_ligue1_matches.csv', 'w', encoding='UTF-8', newline='') as f:
                 r = requests.get(url, Dict_Headers)
                 soup = BeautifulSoup(r.content, 'html.parser')
                 for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                    if type(homeGoal(soup)[j]) != int:
+                        pass
+                    else:
+                        fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
         elif annee == 2021:
             # annee actuel seulement 35 journees terminees le 7 mai 2022
             for i in range(1,36):
@@ -97,12 +105,18 @@ with open('all_ligue1_matches.csv', 'w', encoding='UTF-8', newline='') as f:
                 r = requests.get(url, Dict_Headers)
                 soup = BeautifulSoup(r.content, 'html.parser')
                 for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    fwriter.writerow(['2021-2022', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                    if type(homeGoal(soup)[j]) != int:
+                        pass
+                    else:
+                        fwriter.writerow(['2021-2022', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
         else:
             for i in range(1,39):
                 url = f'https://www.ligue1.fr/calendrier-resultats?seasonId={annee}-{annee+1}&matchDay={i}'
                 r = requests.get(url, Dict_Headers)
                 soup = BeautifulSoup(r.content, 'html.parser')
                 for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                    if type(homeGoal(soup)[j]) != int:
+                        pass
+                    else:
+                        fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
                     
