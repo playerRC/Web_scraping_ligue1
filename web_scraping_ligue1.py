@@ -46,10 +46,10 @@ def homeGoal(soup):
     l = []
     for i in range(1, nbListes(soup)+1):
         for j in range(1, nbElementsDansChaqueListe(soup)[i-1]+1):
-            if Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[3]') == None:
+            if Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[1]') == None:
                 l.append(None)
             else:
-                l.append(int(Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[3]')))
+                l.append(int(Xpath(soup, f'/html/body/main/div[3]/div[2]/div/div[2]/ul[{i}]/li[{j}]/a/div[2]/span/span[1]')))
     return l
 
 def awayGoal(soup):
