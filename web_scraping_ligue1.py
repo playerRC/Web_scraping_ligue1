@@ -64,7 +64,16 @@ def awayGoal(soup):
                 l.append(int(ATG))
     return l
 
-
+def rowWriting(fwriter, matchday, annee):
+    url = f'https://www.ligue1.fr/calendrier-resultats?seasonId={annee}-{annee+1}&matchDay={matchday}'
+    r = requests.get(url, Dict_Headers)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    for j in range(0,sum(nbElementsDansChaqueListe(soup))):
+        if type(homeGoal(soup)[j]) != int:
+            pass
+        else:
+            fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+            
 
 header = ['Season','Matchday','HomeTeam', 'AwayTeam', 'HTG', 'ATG']
 Dict_Headers = ({'User-Agent':
@@ -79,44 +88,16 @@ with open('all_ligue1_matches.csv', 'w', encoding='UTF-8', newline='') as f:
         if annee == 2019:
             # annee covid seulement 28 journees terminees
             for i in range(1,29):
-                url = f'https://www.ligue1.fr/calendrier-resultats?seasonId=2019-2020&matchDay={i}'
-                r = requests.get(url, Dict_Headers)
-                soup = BeautifulSoup(r.content, 'html.parser')
-                for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    if type(homeGoal(soup)[j]) != int:
-                        pass
-                    else:
-                        fwriter.writerow(['2019-2020', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                rowWriting(fwriter, i, 2019)
         elif annee == 1997 or annee == 1998 or annee == 1999 or annee == 2000 or annee == 2001:
             # annees ligue 1 composee de 18 equipes donc 34 journees
             for i in range(1,35):
-                url = f'https://www.ligue1.fr/calendrier-resultats?seasonId={annee}-{annee+1}&matchDay={i}'
-                r = requests.get(url, Dict_Headers)
-                soup = BeautifulSoup(r.content, 'html.parser')
-                for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    if type(homeGoal(soup)[j]) != int:
-                        pass
-                    else:
-                        fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                rowWriting(fwriter, i, annee)
         elif annee == 2021:
-            # annee actuel seulement 35 journees terminees le 7 mai 2022
+            # annee actuel seulement 35 journees terminees le 8 mai 2022
             for i in range(1,36):
-                url = f'https://www.ligue1.fr/calendrier-resultats?seasonId=2021-2022&matchDay={i}'
-                r = requests.get(url, Dict_Headers)
-                soup = BeautifulSoup(r.content, 'html.parser')
-                for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    if type(homeGoal(soup)[j]) != int:
-                        pass
-                    else:
-                        fwriter.writerow(['2021-2022', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                rowWriting(fwriter, i, 2021)
         else:
             for i in range(1,39):
-                url = f'https://www.ligue1.fr/calendrier-resultats?seasonId={annee}-{annee+1}&matchDay={i}'
-                r = requests.get(url, Dict_Headers)
-                soup = BeautifulSoup(r.content, 'html.parser')
-                for j in range(0,sum(nbElementsDansChaqueListe(soup))):
-                    if type(homeGoal(soup)[j]) != int:
-                        pass
-                    else:
-                        fwriter.writerow([f'{annee}-{annee+1}', i, homeTeam(soup)[j], awayTeam(soup)[j], homeGoal(soup)[j], awayGoal(soup)[j]])
+                rowWriting(fwriter, i, annee)
                     
