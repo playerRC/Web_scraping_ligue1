@@ -18,6 +18,7 @@ La deuxième partie du projet consiste à établir un classement général des c
   * 'GA' : nb total de buts encaissés
 
 Pour obtenir ce résultat, il suffit d'éxecuter le fichier ranking.py et vous obtiendrez le résultat final dans le fichier historical_ranking.csv
+Dans le dossier _results_ , vous pouvez voir le classement général de la Ligue 1 depuis la saison 1993-1994
 
 # Site scrapé
 
