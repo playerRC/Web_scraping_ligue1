@@ -114,11 +114,13 @@ def all_stats(df):
 # Read CSV file into DataFrame df
 df = pd.read_csv('all_ligue1_matches.csv')
 
-header = ['Team','Games','Wins','Draws','Defeats','GF','GA','Diff','Points']
+header = ['Rank','Team','Games','Wins','Draws','Defeats','GF','GA','Diff','Points']
 with open('historical_ranking.csv', 'w', encoding='UTF-8', newline='') as f:
     fwriter = csv.writer(f)
     fwriter.writerow(header)
+    i = 1
     for stat in all_stats(df):
-        fwriter.writerow([stat[0], stat[1], stat[2], stat[3], stat[4], stat[5], stat[6], stat[7], stat[8]])
+        fwriter.writerow([i, stat[0], stat[1], stat[2], stat[3], stat[4], stat[5], stat[6], stat[7], stat[8]])
+        i += 1
 
 
