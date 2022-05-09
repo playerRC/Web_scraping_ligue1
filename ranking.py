@@ -9,8 +9,8 @@ def all_teams(df):
             l.append(team)
     return l
 
-''' fct permettant de connaître les résultats d'une équipe donnée sous forme de liste comme suit
-    [ R , GF, GA, Season] avec R = V ou N ou D
+''' fct permettant de connaître les résultats d'une équipe donnée sous forme de liste de liste dont chaque élément s'écrit comme suit
+    [ R , [GF, GA], Season] avec R = V ou N ou D
     et GF = buts marqués , GA = buts encaissés
 '''
 def team_result(df, team):
@@ -49,7 +49,7 @@ def stats(df, team):
         if result[0] == 'V':
             nbWins += 1
             # jusqu'à la saison 1993-1994, une victoire rapportait 2 points
-            if result[0][2] == '1993-1994':
+            if result[2] == '1993-1994':
                 pts += 2
             else:
                 pts += 3
