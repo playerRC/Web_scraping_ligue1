@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May  9 09:45:28 2022
-
-@author: faskar
-"""
-
-
 import pandas as pd
 import csv
 
